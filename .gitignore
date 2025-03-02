@@ -1,0 +1,8 @@
+# Игнорировать папку .idea
+.idea/
+
+# Игнорировать папку venv
+venv/
+
+# Игнорировать файл replace-rules.txt
+replace-rules.txt
