@@ -2,8 +2,12 @@ import requests  # Import the requests library to make HTTP requests
 import os  # Import the os module to access environment variables (not used here, but kept for consistency)
 
 # Set your OpenRouter API key
+<<<<<<< HEAD
 OPENROUTER_API_KEY = "api_key"  # To hold OpenRouter API key in public repository is unsafe so for runnig this code
 # please clone this repository and your key
+=======
+OPENROUTER_API_KEY = "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"
+>>>>>>> 16826687492c9b3de6e6de2089c5494f0dbe63e0
 
 def ask_llm(question):
     """
@@ -43,3 +47,34 @@ def ask_llm(question):
     else:
         # Return an error message if the request failed
         return f"Error: {response.status_code}, {response.text}"
+import requests
+
+def make_api_request(url, headers, data):
+    """
+    Makes a POST request to the specified URL with the given headers and 
+data.
+    
+    Args:
+        url (str): The API endpoint URL.
+        headers (dict): The headers to include in the request.
+        data (dict): The JSON data to send in the request body.
+    
+    Returns:
+        str: The content of the first response message if successful, or 
+an error message if the request fails.
+    """
+    try:
+        # Make the POST request
+        response = requests.post(url, headers=headers, json=data)
+        
+        # Check if the request was successful (status code 200)
+        if response.status_code == 200:
+            # Extract and return the content of the first response message
+            return response.json()["choices"][0]["message"]["content"]
+        else:
+            # Return an error message if the request failed
+            return f"Error: {response.status_code}, {response.text}"
+    
+    except requests.exceptions.RequestException as e:
+        # Handle any exceptions that occur during the request
+        return f"Request failed: {e}"
