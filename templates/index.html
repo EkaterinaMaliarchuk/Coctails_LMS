@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cocktail Advisor Chat</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <h1>Cocktail Advisor Chat</h1>
+    <div id="chat">
+        <div id="output"></div>
+        <input type="text" id="input" placeholder="Ask a question...">
+        <button onclick="sendQuestion()">Send</button>
+    </div>
+
+    <script>
+        async function sendQuestion() {
+            const input = document.getElementById("input").value;
+            const response = await fetch("/api/ask", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ question: input }),
+            });
+            const data = await response.json();
+            document.getElementById("output").innerText = data.response;
+        }
+    </script>
+</body>
+</html>
